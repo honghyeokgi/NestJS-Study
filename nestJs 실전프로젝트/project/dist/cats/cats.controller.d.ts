@@ -1,13 +1,15 @@
+import { CatRequestDto } from './dto/cats.request.dto';
 import { CatsService } from './cats.service';
 export declare class CatsController {
     private readonly catsService;
     constructor(catsService: CatsService);
-    getAllCat(): {
-        cats: string;
-    };
-    getOneCat(param: number): string;
-    createCat(): string;
-    updateCat(): string;
-    updatePartialCat(): string;
-    deleteCat(): string;
+    getCurrentCat(): string;
+    signUp(body: CatRequestDto): Promise<{
+        id: string;
+        email: string;
+        name: string;
+    }>;
+    logIn(): string;
+    logOut(): string;
+    uploadCatImg(): string;
 }

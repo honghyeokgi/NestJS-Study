@@ -1,7 +1,9 @@
+import { CatRequestDto } from './dto/cats.request.dto';
 import { SuccessInterceptor } from './../common/interceptors/success.interceptor';
 import { HttpExceptionFilter } from './../common/exceptions/http-exception.filter';
 import { CatsService } from './cats.service';
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -22,34 +24,28 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  getAllCat() {
-    console.log('hello controller');
-    return { cats: 'get All cat API' };
-  }
-
-  @Get(':id')
-  getOneCat(@Param('id', ParseIntPipe) param: number) {
-    console.log(param);
-    return 'one cat';
+  getCurrentCat() {
+    return 'current cat';
   }
 
   @Post()
-  createCat() {
-    return 'create cat';
+  async signUp(@Body() body: CatRequestDto) {
+    console.log(body);
+    return await this.catsService.signUp(body);
   }
 
-  @Put(':id')
-  updateCat() {
-    return 'update cat';
+  @Post('login')
+  logIn() {
+    return 'login';
   }
 
-  @Patch(':id')
-  updatePartialCat() {
-    return 'update';
+  @Post('logout')
+  logOut() {
+    return 'logout';
   }
 
-  @Delete(':id')
-  deleteCat() {
-    return 'delete service';
+  @Post('upload/cats')
+  uploadCatImg() {
+    return 'uploadImg';
   }
 }
